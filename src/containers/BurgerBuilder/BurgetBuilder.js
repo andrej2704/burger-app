@@ -17,7 +17,19 @@ class BurgerBulder extends Component {
       bacon: 0,
       meat: 0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    purchaseable: false
+  };
+
+  updatePurchaseState = ingridients => {
+    const sum = Object.keys(ingridients)
+      .map(igKey => {
+        return ingridients[igKey];
+      })
+      .reduce((sum, el) => {
+        return sum + el;
+      });
+    this.setState({ purchaseable: sum > 0 });
   };
 
   addIngridientHandler = type => {
@@ -31,6 +43,7 @@ class BurgerBulder extends Component {
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice + priceAddition;
     this.setState({ totalPrice: newPrice, ingridients: updatedIngridients });
+    this.updatePurchaseState(updatedIngridients);
   };
 
   removeIngridientHandler = type => {
@@ -44,6 +57,7 @@ class BurgerBulder extends Component {
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - priceDeduction;
     this.setState({ totalPrice: newPrice, ingridients: updatedIngridients });
+    this.updatePurchaseState(updatedIngridients);
   };
   render() {
     const disableInfo = {
@@ -60,6 +74,7 @@ class BurgerBulder extends Component {
           ingridientRemoved={this.removeIngridientHandler}
           disabled={disableInfo}
           price={this.state.totalPrice}
+          purchaseable={this.state.purchaseable}
         />
       </Aux>
     );
