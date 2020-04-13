@@ -59,6 +59,7 @@ class BurgerBulder extends Component {
           ingridientAdded={this.addIngridientHandler}
           ingridientRemoved={this.removeIngridientHandler}
           disabled={disableInfo}
+          price={this.state.totalPrice}
         />
       </Aux>
     );
