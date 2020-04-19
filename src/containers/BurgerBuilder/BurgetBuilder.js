@@ -91,6 +91,7 @@ class BurgerBulder extends Component {
             purchaseCanceled={this.purchaseCancelHandler}
             purchaseContinued={this.purchaseContinueHandler}
             ingridients={this.state.ingridients}
+            price={this.state.totalPrice.toFixed(2)}
           />
         </Modal>
         <Burger ingridients={this.state.ingridients} />
